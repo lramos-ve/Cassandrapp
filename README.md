@@ -16,7 +16,7 @@ Cassadrapp es una aplicación web interactiva y en tiempo real diseñada para ay
 *   **Backend:** Node.js, Express, Socket.IO.
 *   **Base de Datos:** SQLite (`better-sqlite3`).
 
-## 🚀 Cómo ejecutar el proyecto
+## 🚀 Cómo ejecutar el proyecto en Desarrollo
 
 Sigue estos pasos para correr el proyecto en tu entorno local:
 
@@ -34,16 +34,27 @@ Sigue estos pasos para correr el proyecto en tu entorno local:
    - El frontend estará disponible usualmente en `http://localhost:5173`.
    - El backend y los WebSockets correrán en el puerto `3001`.
 
-3. **Construir para producción:**
+## 🐳 Despliegue en Producción (Docker)
+
+El proyecto cuenta con integración y despliegue continuo (CI/CD) automatizado. Cuando se publica un nuevo *Release*, GitHub Actions construye una imagen de Docker y la aloja en el GitHub Container Registry (GHCR).
+
+Para desplegarlo en tu servidor (VPS):
+
+1. **Clona o descarga el archivo `docker-compose.yml`** en tu servidor.
+2. Si tienes información previa, mueve tu archivo de base de datos a una carpeta `data` junto al archivo compose (`./data/database.sqlite`).
+3. Ejecuta el entorno en segundo plano:
    ```bash
-   npm run build
+   docker-compose up -d
    ```
+
+El servidor incluye **Watchtower**, que automáticamente revisará cada 5 minutos si hay nuevas actualizaciones en GitHub y actualizará tu servidor sin que tengas que intervenir.
 
 ## 📦 Estructura del Proyecto
 
 *   `src/`: Contiene todo el código del Frontend en React (Componentes, App principal).
 *   `server.js`: Archivo principal del servidor Backend (Express + Socket.IO + SQLite).
-*   `database.sqlite`: Base de datos SQLite (se genera automáticamente).
+*   `.github/workflows/`: Pipelines de automatización CI/CD.
+*   `Dockerfile` & `docker-compose.yml`: Archivos de configuración para despliegue automatizado en contenedores.
 
 ---
 *Un espacio especial para preparar la llegada del nuevo integrante de la familia.* ❤️

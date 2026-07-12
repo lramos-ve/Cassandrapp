@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   cassandrapp:
-    image: ghcr.io/MI_USUARIO/MI_REPOSITORIO:latest
+    image: ghcr.io/lramos-ve/noe:latest
     container_name: cassandrapp
     restart: always
     ports:
