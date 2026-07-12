@@ -1,0 +1,434 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 2rem;
+  background-image: radial-gradient(circle at top left, #fdfbf7, #fdfbf7, #fdfbf7);
+  overflow: hidden; /* Prevent body scrolling when dragging */
+}
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.tab-btn {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active {
+  background: white;
+  color: var(--text-color);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.board {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden; /* Hide vertical scroll on board container */
+  padding-bottom: 1rem;
+  align-items: flex-start;
+  scroll-behavior: smooth;
+  /* Scroll snap for mobile */
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Hide scrollbar for the board but keep functionality */
+.board::-webkit-scrollbar {
+  height: 6px;
+}
+
+.column {
+  background-color: var(--column-bg);
+  border-radius: var(--border-radius-lg);
+  width: 340px;
+  min-width: 340px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  scroll-snap-align: center;
+  flex-shrink: 0;
+}
+
+.column-header {
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(0,0,0,0.03);
+  flex-shrink: 0;
+}
+
+.column-header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.task-count {
+  background: rgba(0,0,0,0.06);
+  padding: 0.15rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.task-list {
+  padding: 1rem;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 50px;
+}
+
+.task-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius-md);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  border-left: 5px solid transparent;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: grab;
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+.task-card:active {
+  cursor: grabbing;
+  transform: scale(1.02); /* Feedback visual táctil */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.task-card[data-priority="high"] {
+  border-left-color: var(--priority-high);
+}
+
+.task-card[data-priority="medium"] {
+  border-left-color: var(--priority-medium);
+}
+
+.task-card[data-priority="low"] {
+  border-left-color: var(--priority-low);
+}
+
+.task-title {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.task-actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.task-action-btn {
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  margin: -0.4rem 0; /* Increase touch target vertically without breaking layout */
+}
+
+.task-action-btn:hover, .task-action-btn:active {
+  color: var(--accent-color);
+}
+
+.task-action-btn.delete:hover, .task-action-btn.delete:active {
+  color: #ef4444;
+}
+
+.task-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed rgba(0,0,0,0.05);
+}
+
+.task-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.tag {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.task-assignee {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  background-color: #f8fafc;
+  color: #64748b;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.task-assignee.papa {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.task-assignee.mama {
+  background-color: #fce7f3;
+  color: #be185d;
+}
+
+.task-assignee.ambos {
+  background-color: #f3f4f6;
+  color: #4b5563;
+}
+
+.add-task-btn {
+  margin: 0 1rem 1rem 1rem;
+  padding: 0.85rem; /* Taller for touch */
+  background-color: transparent;
+  border: 2px dashed #cbd5e1;
+  border-radius: var(--border-radius-md);
+  color: var(--text-muted);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  min-height: 44px; /* A11y minimum touch target */
+}
+
+.add-task-btn:hover, .add-task-btn:active {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  background-color: rgba(167, 139, 250, 0.05);
+}
+
+/* Modal / Form */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.2s forwards;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--border-radius-lg);
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transform: translateY(20px);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+  font-size: 1.25rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem; /* Larger for touch */
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 0.5rem;
+  margin: -0.5rem;
+  line-height: 1;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: var(--text-color);
+}
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 0.85rem; /* Larger for touch */
+  border: 1px solid #cbd5e1;
+  border-radius: var(--border-radius-md);
+  font-size: 1rem; /* Prevent auto-zoom on iOS */
+  outline: none;
+  transition: border-color 0.2s;
+  background-color: #fafaf9;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: var(--accent-color);
+  background-color: white;
+}
+
+.form-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 1rem; /* Larger for touch */
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-height: 48px;
+}
+
+.btn-primary:hover, .btn-primary:active {
+  background-color: var(--accent-hover);
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  to { transform: translateY(0); }
+}
+
+/* Responsiveness (Mobile First focus tweaks) */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 1rem 0; /* Remove horizontal padding so columns can swipe fully */
+  }
+  
+  .header {
+    margin-bottom: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .header p {
+    font-size: 0.95rem;
+  }
+  
+  .board {
+    padding: 0 1rem 1rem 1rem; /* Padding inside the scroll container */
+    gap: 1rem;
+  }
+  
+  .column {
+    /* 85vw width so the next column peeks out */
+    width: 85vw;
+    min-width: 85vw;
+  }
+
+  /* Bottom sheet style for modal */
+  .modal-overlay {
+    align-items: flex-end; /* Push to bottom */
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 24px 24px 0 0; /* Only top rounded */
+    padding: 2rem 1.5rem 3rem 1.5rem; /* Extra padding at bottom for safe area */
+    animation: bottomSheetSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes bottomSheetSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+}
