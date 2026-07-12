@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  cassandrapp:
+    image: ghcr.io/MI_USUARIO/MI_REPOSITORIO:latest
+    container_name: cassandrapp
+    restart: always
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./data:/app/data
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - DB_PATH=/app/data/database.sqlite
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 300 --cleanup

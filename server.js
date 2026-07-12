@@ -21,7 +21,8 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
 // Ensure database directory exists if needed, but it's just in the root
-const db = new Database('database.sqlite');
+const dbPath = process.env.DB_PATH || 'database.sqlite';
+const db = new Database(dbPath);
 db.exec(`
   CREATE TABLE IF NOT EXISTS app_state (
     key TEXT PRIMARY KEY,
