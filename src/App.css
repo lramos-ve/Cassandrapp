@@ -55,6 +55,7 @@
 
 .board {
   display: flex;
+  justify-content: center;
   gap: 1.5rem;
   flex: 1;
   overflow-x: auto;
@@ -405,6 +406,7 @@
   .board {
     padding: 0 1rem 1rem 1rem; /* Padding inside the scroll container */
     gap: 1rem;
+    justify-content: flex-start;
   }
   
   .column {

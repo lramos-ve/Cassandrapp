@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Play, Square, Save, Activity, Trash2, Clock, ChevronDown, ChevronRight } from 'lucide-react';
+import { Play, Square, Save, Activity, Trash2, Clock, ChevronDown, ChevronRight, Share2 } from 'lucide-react';
 import { socket } from '../socket';
 import './ContractionCounter.css';
 
@@ -140,6 +140,58 @@ const ContractionCounter = () => {
     setExpandedSessions(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
+  const shareSession = async (session) => {
+    let title = session.name;
+    if (!title) {
+      const dateString = new Date(session.startTime).toLocaleDateString([], { day: '2-digit', month: 'short', year: 'numeric' });
+      const timeString = new Date(session.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      title = `Sesión: ${dateString} ${timeString} (En curso)`;
+    }
+    
+    let shareText = `🤰 ${title}\n`;
+    shareText += `📊 Total de contracciones: ${session.contractions?.length || 0}\n\n`;
+    
+    if (session.contractions && session.contractions.length > 0) {
+      shareText += `Detalle:\n`;
+      const chronContractions = [...session.contractions].reverse();
+      chronContractions.forEach((c, idx) => {
+        const isFirst = idx === 0;
+        const previousStart = isFirst ? null : chronContractions[idx - 1].start;
+        const freq = previousStart ? c.start - previousStart : null;
+        
+        const durationStr = formatTime(c.end - c.start);
+        const freqStr = freq ? formatTime(freq) : '-';
+        const timeStr = formatTimestamp(c.start);
+        
+        shareText += `${idx + 1}. ⏰ ${timeStr} | ⏳ ${durationStr} | 🔄 ${freqStr}\n`;
+      });
+    }
+
+    if (session.currentContractionStart) {
+      const runningDuration = formatTime(Date.now() - session.currentContractionStart);
+      const timeStr = formatTimestamp(session.currentContractionStart);
+      const lastFinished = session.contractions?.[0];
+      const freq = lastFinished ? session.currentContractionStart - lastFinished.start : null;
+      const freqStr = freq ? formatTime(freq) : '-';
+
+      shareText += `\n🔴 En curso: ⏰ ${timeStr} | ⏳ ${runningDuration} | 🔄 ${freqStr}\n`;
+    }
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: 'Registro de Contracciones',
+          text: shareText
+        });
+      } else {
+        await navigator.clipboard.writeText(shareText);
+        alert('Texto copiado al portapapeles (Compartir nativo no soportado en este navegador)');
+      }
+    } catch (err) {
+      console.error('Error al compartir', err);
+    }
+  };
+
   if (loading) {
     return <div className="contractions-container"><p>Cargando...</p></div>;
   }
@@ -163,9 +215,14 @@ const ContractionCounter = () => {
             </div>
           ) : (
             <div className="active-state">
-              <div className="active-header">
-                <h3>Sesión Activa</h3>
-                <span className="session-time">Iniciada a las {formatTimestamp(activeSession.startTime)}</span>
+              <div className="active-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <h3>Sesión Activa</h3>
+                  <span className="session-time">Iniciada a las {formatTimestamp(activeSession.startTime)}</span>
+                </div>
+                <button className="btn-icon-primary" onClick={() => shareSession(activeSession)} title="Compartir">
+                  <Share2 size={20} />
+                </button>
               </div>
               
               <div className="big-button-container">
@@ -246,9 +303,14 @@ const ContractionCounter = () => {
                         <span className="badge">{session.contractions?.length || 0} reg.</span>
                       </div>
                     </div>
-                    <button className="btn-icon-danger" onClick={(e) => { e.stopPropagation(); deleteSession(session.id); }}>
-                      <Trash2 size={18} />
-                    </button>
+                    <div className="history-actions" style={{ display: 'flex', gap: '0.5rem' }}>
+                      <button className="btn-icon-primary" onClick={(e) => { e.stopPropagation(); shareSession(session); }} title="Compartir">
+                        <Share2 size={18} />
+                      </button>
+                      <button className="btn-icon-danger" onClick={(e) => { e.stopPropagation(); deleteSession(session.id); }} title="Eliminar">
+                        <Trash2 size={18} />
+                      </button>
+                    </div>
                   </div>
                   
                   {expandedSessions[session.id] && session.contractions?.length > 0 && (

@@ -52,6 +52,7 @@ const NotesEditor = () => {
       StarterKit,
       TaskList,
       TaskItem.extend({
+        draggable: true,
         addKeyboardShortcuts() {
           const parentShortcuts = this.parent?.() || {};
           return {

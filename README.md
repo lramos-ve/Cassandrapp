@@ -4,10 +4,10 @@ Cassadrapp es una aplicación web interactiva y en tiempo real diseñada para ay
 
 ## 🌟 Características Principales
 
-*   **Tablero Kanban:** Gestiona tus tareas por hacer, en progreso y listas (ej. Comprar cuna, Agendar pediatra). Permite asignar prioridades, etiquetas y responsables (Papá, Mamá o Ambos) con funcionalidad de "Drag & Drop".
-*   **Editor de Notas:** Un espacio de texto enriquecido para guardar apuntes, listas de compras, o diarios sobre el embarazo.
-*   **Contador de Contracciones:** Una herramienta integrada para registrar y medir la frecuencia y duración de las contracciones.
-*   **Sincronización en Tiempo Real:** Los cambios realizados en el tablero o las notas se sincronizan al instante en todos los dispositivos conectados gracias a **Socket.IO**.
+*   **Tablero Kanban:** Gestiona tus tareas (Comprar cuna, Agendar pediatra) con vista adaptativa (centrado en escritorio, deslizable en móvil). Permite arrastrar y soltar, asignar prioridades, etiquetas y responsables.
+*   **Editor de Notas:** Espacio de texto enriquecido para diarios y listas. ¡Las listas de tareas incluyen casillas interactivas y se pueden reordenar arrastrándolas!
+*   **Contador de Contracciones:** Herramienta integrada para registrar la frecuencia y duración. ¡Incluye un botón para compartir fácilmente las sesiones (ej. por WhatsApp) en tiempo real!
+*   **Sincronización en Tiempo Real:** Cambios en el tablero o notas se sincronizan al instante en todos los dispositivos conectados vía **Socket.IO**.
 *   **Almacenamiento Local:** Los datos se guardan de forma persistente utilizando una base de datos local SQLite.
 
 ## 🛠️ Tecnologías Utilizadas
