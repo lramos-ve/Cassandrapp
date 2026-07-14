@@ -4,6 +4,7 @@ Cassadrapp es una aplicación web interactiva y en tiempo real diseñada para ay
 
 ## 🌟 Características Principales
 
+*   **Calendario Médico y Síntomas:** Un calendario interactivo con soporte para múltiples vistas (Día, 3 Días, Semana, Mes). Permite llevar un directorio de doctores, gestionar guardias (con cálculo automático de "Post Guardia") y registrar síntomas o eventos. Cuenta con una ventana emergente optimizada para móviles con botones de acción flotantes (FABs) para captura rápida.
 *   **Tablero Kanban:** Gestiona tus tareas (Comprar cuna, Agendar pediatra) con vista adaptativa (centrado en escritorio, deslizable en móvil). Permite arrastrar y soltar, asignar prioridades, etiquetas y responsables.
 *   **Editor de Notas:** Espacio de texto enriquecido para diarios y listas. ¡Las listas de tareas incluyen casillas interactivas y se pueden reordenar arrastrándolas!
 *   **Contador de Contracciones:** Herramienta integrada para registrar la frecuencia y duración. ¡Incluye un botón para compartir fácilmente las sesiones (ej. por WhatsApp) en tiempo real!

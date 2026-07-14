@@ -1,0 +1,330 @@
+.guardias-module {
+  display: flex;
+  gap: 1.5rem;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+
+.doctors-sidebar {
+  width: 280px;
+  background-color: var(--column-bg);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+}
+
+.calendar-main {
+  flex: 1;
+  background-color: var(--column-bg);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+}
+
+/* Sidebar Elements */
+.sidebar-header {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-doc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.color-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.color-input {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.doctors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.doctor-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 0.75rem;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.doc-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.doc-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+/* Calendar Header */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-header h2 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.nav-btn {
+  background: white;
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: all 0.2s;
+}
+
+.nav-btn:hover {
+  background: var(--accent-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+.calendar-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.calendar-grid.view-month,
+.calendar-grid.view-week {
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-grid.view-3days {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.calendar-grid.view-3days .day-cell {
+  min-height: 250px;
+}
+
+.calendar-grid.view-day {
+  grid-template-columns: 1fr;
+}
+
+.calendar-grid.view-day .day-cell {
+  min-height: 400px;
+}
+
+.day-name {
+  text-align: center;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.day-cell {
+  background: var(--card-bg);
+  border-radius: var(--border-radius-md);
+  min-height: 100px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, border 0.2s;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.day-cell.empty {
+  background: transparent;
+  cursor: default;
+}
+
+.day-cell:not(.empty):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  border-color: rgba(167, 139, 250, 0.3);
+}
+
+.day-cell.today {
+  border-color: var(--accent-color);
+  background: rgba(167, 139, 250, 0.05);
+}
+
+.day-number {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.day-cell.today .day-number {
+  color: var(--accent-color);
+}
+
+.shift-tag {
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.shift-tag.post-guardia {
+  background-color: transparent !important;
+  border: 2px dashed;
+  color: var(--text-color);
+  font-style: italic;
+  box-shadow: none;
+}
+
+/* Modal styles overrides for calendar */
+.shift-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.shift-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  padding: 0.75rem;
+  border-radius: var(--border-radius-md);
+  border-left: 4px solid;
+}
+
+.shift-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.shift-item-doc {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.shift-item-type {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.round-action-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.round-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .guardias-module {
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .doctors-sidebar {
+    width: 100%;
+    flex-shrink: 0;
+  }
+  .calendar-main {
+    flex-shrink: 0;
+    padding: 1rem 0.5rem;
+  }
+  .day-cell {
+    min-height: 70px;
+    padding: 0.25rem;
+  }
+  .day-number {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .view-month .shifts,
+  .view-week .shifts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    margin-top: 4px;
+  }
+  .view-month .shift-tag,
+  .view-week .shift-tag {
+    width: 8px !important;
+    height: 8px !important;
+    padding: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    color: transparent !important;
+    margin: 0;
+  }
+  .view-month .shift-tag svg,
+  .view-week .shift-tag svg {
+    display: none !important;
+  }
+  .view-month .shift-tag.post-guardia,
+  .view-week .shift-tag.post-guardia {
+    border: 1px solid;
+    background-color: transparent !important;
+  }
+}

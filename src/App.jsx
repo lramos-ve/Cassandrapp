@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { Plus, Trash2, Heart, Pencil, User, Users, Activity } from 'lucide-react';
+import { Plus, Trash2, Heart, Pencil, User, Users, Activity, Calendar as CalendarIcon } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import { socket } from './socket';
 import './App.css';
 import NotesEditor from './components/NotesEditor';
 import ContractionCounter from './components/ContractionCounter';
+import Calendar from './components/Calendar';
 
 const initialData = {
   tasks: {
@@ -301,6 +302,12 @@ function App() {
           >
             <Activity size={16} /> Contracciones
           </button>
+          <button 
+            className={`tab-btn ${activeTab === 'calendar' ? 'active' : ''}`}
+            onClick={() => setActiveTab('calendar')}
+          >
+            <CalendarIcon size={16} /> Calendario
+          </button>
         </nav>
       </header>
 
@@ -388,6 +395,8 @@ function App() {
         </DragDropContext>
       ) : activeTab === 'notes' ? (
         <NotesEditor />
+      ) : activeTab === 'calendar' ? (
+        <Calendar />
       ) : (
         <ContractionCounter />
       )}
