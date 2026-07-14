@@ -1,0 +1,16 @@
+{
+  "name": "Cassandrapp",
+  "short_name": "Cassandrapp",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fdfbf7",
+  "theme_color": "#fdfbf7",
+  "icons": [
+    {
+      "src": "/icon.jpg",
+      "sizes": "192x192 512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
